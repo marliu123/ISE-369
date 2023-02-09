@@ -10,4 +10,10 @@ df = df.rename(columns = {4:"Pty"})
 df = df.rename(columns = {5:"$$"})
 df = df.rename(columns = {18:"State"})
 df = df.rename(columns = {23:"Status"})
-print(df)
+df = df.sort_values('$$', ascending=False)
+
+def format(x):
+    return "${:.2f}M".format(x/1000000)
+df['$$'] = df['$$'].apply(format)
+print("Top 25")
+print(df.head(25))
