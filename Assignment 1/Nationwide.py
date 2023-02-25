@@ -18,9 +18,17 @@ df =df.loc[df['ID'] < 'I']
 def format(x):
     return "${:.2f}M".format(x/1000000)
 
+def format2(x):
+    if x == "I":
+        return "Incumbent"
+    else :
+        return "Challenger"
 
-
-
+def format3(x):
+    if x == "REP":
+        return "Republican"
+    else :
+        return "Democrat"
 
 df2 = df
 df2 = df2.sort_values('$$', ascending=False)
@@ -28,9 +36,9 @@ df2["$$"] = df2["$$"].apply(format)
 print("1. Which individual raised the most campaign money? How much money?")
 print( df2.iat[0,1], "raised the most campaign money. They raised", df2.iat[0,4])
 print("a. Is this individual a Republican or Democrat?")
-print("This individual is a", df2.iat[0,3])
+print("This individual is a", format3(df2.iat[0,3]))
 print("b. Is this individual an incumbent or challenger?")
-print("This individual is a", df2.iat[0,2])
+print("This individual is a", format2(df2.iat[0,2]))
 
 df3 = df
 df3 = df3.sort_values('Disbursement', ascending=False)
@@ -38,8 +46,8 @@ df3["Disbursement"] = df3["Disbursement"].apply(format)
 print("\n2. Which individual spent the most campaign money? How much money?")
 print( df3.iat[0,1], "spent the most campaign money. They spent", df3.iat[0,5])
 print("a. Is this individual a Republican or Democrat?")
-print("This individual is a", df3.iat[0,3])
-print("b. Is this individual an incumbent or challenger?", df3.iat[0,2])
+print("This individual is a", format3(df3.iat[0,3]))
+print("b. Is this individual an incumbent or challenger?", format2(df3.iat[0,2]))
 
 df4 = df 
 df4 = df4.loc[df4['Party'] == 'DEM']
